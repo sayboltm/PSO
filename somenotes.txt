@@ -1,0 +1,35 @@
+fixed bug with indexing (i+j) LOL
+
+- fixed pareto points 
+- added parallelized search (use less cores) to search because many many many more points now that data is not being overwritten
+
+It is interesting that a solution even close to HEEDS was obtained with data being overwritten like that, and with as few of trials.
+The next thousands must just get a little more precise.  There is probably a more efficient way of doing this. (changing params etc)
+
+added timestamp
+
+Added 'ComesFromTrial' object to Sublaminate struct in order to verify the trial with the data.  It is correct.  Data from presentation was correct as well.
+
+
+Interesting to note that the objective with a bigger search space seems to have more options.  The scale should be relative to the size of the search space
+
+Need way to find a point on the graph: current solution is to run:
+
+ for i = 1:length(p2.storage.trial); A(i) = p2.storage.trial(i).Objectives.Mass; end
+>> [rows, columns] = find(A <= 15.69)
+
+Where 15.69 is slightly bigger than the value for an objective point on pareto front that is to be minimized.
+
+Then go to that trial and look at 'position'
+
+
+After we tried with more than 1 objective and 2 inputs, it became clear that fully modularized code was necessary and would save a lot of headaches for implementation 
+with the second study.  To really see what this code is capable of, we need a MATLAB license for more than 12 cores, and a supercomputer or much more time.  
+This code took 23 hours to run on computer with following specs: (1000 iterations, 500 particles; 100 iterations, 50 particles)
+Intel i7 4790k @ 4GHz - 8 logical (?) cores
+32 GB DDR3 RAM @ 1600 MHz
+
+
+BigRunWorkspace is this run
+
+Workspace_server is server version.  Ran from 4/29/2016 23:30 - 5/2/2016 0:47 using 12 cores for everything.
